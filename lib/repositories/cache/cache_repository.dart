@@ -4,29 +4,48 @@ import '../../utils/utils.dart';
 class CacheRepository {
   final prioridades = ['🔴 Prioridad 1', '🟠 Prioridad 2', '🔵 Prioridad 3'];
 
-  static List<Task> _taskList = [
-    Task(1, "Hacer colada", "Hacer colada bien", 1),
-    Task(2, "Hacer chocolate", "Hacer chocolate bien", 2),
-    Task(3, "Hacer codigo", "Hacer codigo bien", 3),
-    Task(4, "Hacer VOlar", "Hacer VOlar bien", 2)
-  ];
+  static List<Task> _taskList = [];
+
+  static List<Task> _taskListTemp = [];
 
   List<Task> get getTaskList{
     return _taskList;
   }
 
+  List<Task> get getTaskListTemp{
+    return _taskListTemp;
+  }
+
+  set setTaskListTemp(List<Task> listTaskTemp){
+    _taskListTemp = listTaskTemp;
+  }
+
   set setTaskList(List<Task> listTask){
-    _taskList = listTask;
+    _taskList = [];
+    _taskList.addAll(listTask);
   }
   set setTaskInList(Task task){
      _taskList.add(task);
   }
 
+  void removeTaskInList(int index){
+    _taskListTemp = [];
+    _taskListTemp.addAll(_taskList);
+    _taskList.removeAt(index);
+  }
+   void undoRemoveTaskInList(){
+    _taskList = [];
+    _taskList.addAll(_taskListTemp);
+   }
+
   void sortTaskList(){
     _taskList = sortList(_taskList);
   }
-  void clearAndPutList(List<Task> taskList){
-    _taskList = [];
-    _taskList.addAll(taskList);
+
+  void modifyTaskInList(int id, String title, String description, int priorityLevel){
+    int index = _taskList.indexWhere((element) => element.id == id);
+    _taskList[index].title = title;
+    _taskList[index].description = description;
+    _taskList[index].priorityLevel = priorityLevel;
   }
 }

@@ -15,7 +15,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
   firebase_core: ^2.7.1
+  cloud_firestore: ^4.4.4
   dropdown_button2: ^1.9.2
+  rxdart: ^0.27.7
 
 dev_dependencies:
   flutter_test:

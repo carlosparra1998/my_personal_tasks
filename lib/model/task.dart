@@ -5,4 +5,5 @@ class Task{
   late int priorityLevel;
 
   Task(this.id, this.title, this.description, this.priorityLevel);
+
 }
