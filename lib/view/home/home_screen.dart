@@ -1,8 +1,11 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:my_personal_tasks/repositories/cache/cache_repository.dart';
+import 'package:provider/provider.dart';
 
 import '../../model/task.dart';
 import '../../utils/utils.dart';
+import '../../view_model/task_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -18,8 +21,10 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    sortList(taskList);
-
+    TaskVM moviesViewModel = context.watch<TaskVM>();
+    
+    moviesViewModel.sortTaskList();
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -43,16 +48,16 @@ class _HomeScreen extends State<HomeScreen> {
         child: Center(
             child: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: taskList.length,
+          itemCount: moviesViewModel.getTaskList().length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
               child: ListTile(
                 onTap: () {
                   modTask(
                           context,
-                          taskList[index].title,
-                          taskList[index].description,
-                          taskList[index].priorityLevel,
+                          moviesViewModel.getTaskList()[index].title,
+                          moviesViewModel.getTaskList()[index].description,
+                          moviesViewModel.getTaskList()[index].priorityLevel,
                           index)
                       .then((value) {
                     setState(() {});
@@ -61,9 +66,9 @@ class _HomeScreen extends State<HomeScreen> {
                 contentPadding: EdgeInsets.all(0),
                 leading: Checkbox(
                   side: BorderSide(
-                    color: (taskList[index].priorityLevel == 1)
+                    color: (moviesViewModel.getTaskList()[index].priorityLevel == 1)
                         ? Colors.red
-                        : (taskList[index].priorityLevel == 2
+                        : (moviesViewModel.getTaskList()[index].priorityLevel == 2
                             ? Colors.orange
                             : Colors.blue), //your desire colour here
                     width: 2.5,
@@ -73,16 +78,15 @@ class _HomeScreen extends State<HomeScreen> {
                   onChanged: (bool? value) {
                     setState(() {});
                     var auxil = <Task>[];
-                    auxil.addAll(taskList);
-                    taskList.removeAt(index);
+                    auxil.addAll(moviesViewModel.getTaskList());
+                    moviesViewModel.getTaskList().removeAt(index);
                     final snackBar = SnackBar(
                       duration: Duration(milliseconds: 2300),
                       content: Text('Tarea completada :)'),
                       action: SnackBarAction(
                         label: 'Deshacer',
                         onPressed: () {
-                          taskList = [];
-                          taskList.addAll(auxil);
+                          moviesViewModel.clearAndPutList(auxil);
 
                           setState(() {});
                         },
@@ -95,8 +99,8 @@ class _HomeScreen extends State<HomeScreen> {
                   },
                   value: false,
                 ),
-                title: Text(taskList[index].title),
-                subtitle: Text(taskList[index].description),
+                title: Text(moviesViewModel.getTaskList()[index].title),
+                subtitle: Text(moviesViewModel.getTaskList()[index].description),
               ),
             );
           },
@@ -125,6 +129,8 @@ Future<String?> modTask(BuildContext context, String title, String subtitle,
 
   var items = ['🔴 Prioridad 1', '🟠 Prioridad 2', '🔵 Prioridad 3'];
   String _dropdownvalue = items[priority - 1];
+
+  TaskVM moviesViewModel = context.watch<TaskVM>();
 
   return showDialog(
       context: context,
@@ -200,10 +206,10 @@ Future<String?> modTask(BuildContext context, String title, String subtitle,
                 actions: <Widget>[
                   OutlinedButton(
                     onPressed: () {
-                      taskList[index].title = controllerNew.text;
-                      taskList[index].description = controllerNew2.text;
-                      taskList[index].priorityLevel = priority;
-                      sortList(taskList);
+                      moviesViewModel.getTaskList()[index].title = controllerNew.text;
+                      moviesViewModel.getTaskList()[index].description = controllerNew2.text;
+                      moviesViewModel.getTaskList()[index].priorityLevel = priority;
+                      moviesViewModel.sortTaskList();
 
                       setState(() {});
 
@@ -232,7 +238,7 @@ Future<String?> addTask(BuildContext context) async {
   String _dropdownvalue = '🔴 Prioridad 1';
   int priority = 1;
   var items = ['🔴 Prioridad 1', '🟠 Prioridad 2', '🔵 Prioridad 3'];
-
+  TaskVM moviesViewModel = context.watch<TaskVM>();
   return showDialog(
       context: context,
       builder: (context) {
@@ -306,10 +312,10 @@ Future<String?> addTask(BuildContext context) async {
                 actions: <Widget>[
                   OutlinedButton(
                     onPressed: () {
-                      taskList.add(Task(taskList.last.id + 1,
+                      moviesViewModel.setTaskInList(Task(moviesViewModel.getTaskList().last.id + 1,
                           controllerNew.text, controllerNew2.text, priority));
 
-                      sortList(taskList);
+                      moviesViewModel.sortTaskList();
 
                       Navigator.pop(context);
                     },
