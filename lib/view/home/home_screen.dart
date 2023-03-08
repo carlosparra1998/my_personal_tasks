@@ -130,7 +130,7 @@ Future<String?> modTask(BuildContext context, String title, String subtitle,
   var items = ['🔴 Prioridad 1', '🟠 Prioridad 2', '🔵 Prioridad 3'];
   String _dropdownvalue = items[priority - 1];
 
-  TaskVM moviesViewModel = context.watch<TaskVM>();
+  TaskVM moviesViewModel = Provider.of<TaskVM>(context, listen: false);
 
   return showDialog(
       context: context,
@@ -238,7 +238,7 @@ Future<String?> addTask(BuildContext context) async {
   String _dropdownvalue = '🔴 Prioridad 1';
   int priority = 1;
   var items = ['🔴 Prioridad 1', '🟠 Prioridad 2', '🔵 Prioridad 3'];
-  TaskVM moviesViewModel = context.watch<TaskVM>();
+  TaskVM moviesViewModel = Provider.of<TaskVM>(context, listen: false);
   return showDialog(
       context: context,
       builder: (context) {
