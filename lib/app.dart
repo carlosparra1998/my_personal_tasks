@@ -11,7 +11,7 @@ class MyPersonalTasksApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Personal Tasks',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: const HomeScreen(title: 'My tasks'),
     );
