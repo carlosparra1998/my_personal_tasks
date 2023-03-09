@@ -15,16 +15,16 @@ class CacheRepository {
     return _taskListTemp;
   }
 
-  set setTaskListTemp(List<Task> listTaskTemp){
-    _taskListTemp = listTaskTemp;
-  }
-
   set setTaskList(List<Task> listTask){
     _taskList = [];
     _taskList.addAll(listTask);
   }
   set setTaskInList(Task task){
      _taskList.add(task);
+  }
+
+  set setTaskListTemp(List<Task> listTaskTemp){
+    _taskListTemp = listTaskTemp;
   }
 
   void removeTaskInList(int index){

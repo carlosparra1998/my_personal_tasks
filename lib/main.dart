@@ -20,25 +20,27 @@ Future<void> main() async {
 
   bool darkTheme = prefs.getBool(s.darkThemeKey) ?? false;
 
-  Color themeColor =
-      (darkTheme) ? const Color.fromARGB(255, 46, 46, 46) : Colors.white;
-  Color fontColor = (darkTheme) ? Colors.white : Colors.black;
-  Color subtitleColor = (darkTheme)
-      ? const Color.fromARGB(255, 185, 185, 185)
-      : const Color.fromARGB(255, 139, 139, 139);
-  Color cardColor =
-      (darkTheme) ? const Color.fromARGB(255, 88, 88, 88) : Colors.white;
-  Color iconColor = (darkTheme) ? Colors.black : Colors.white;
-  Color buttonColor =
-      (darkTheme) ? const Color.fromARGB(255, 255, 212, 212) : Colors.red;
-
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TaskVM()),
         ChangeNotifierProvider(
-            create: (_) => ThemeVM(darkTheme, themeColor, fontColor,
-                subtitleColor, cardColor, iconColor, buttonColor)),
+            create: (_) => ThemeVM(
+                darkTheme,
+                (darkTheme)
+                    ? const Color.fromARGB(255, 46, 46, 46)
+                    : Colors.white,
+                (darkTheme) ? Colors.white : Colors.black,
+                (darkTheme)
+                    ? const Color.fromARGB(255, 185, 185, 185)
+                    : const Color.fromARGB(255, 139, 139, 139),
+                (darkTheme)
+                    ? const Color.fromARGB(255, 88, 88, 88)
+                    : Colors.white,
+                (darkTheme) ? Colors.black : Colors.white,
+                (darkTheme)
+                    ? const Color.fromARGB(255, 255, 212, 212)
+                    : Colors.red)),
       ],
       child: const MyPersonalTasksApp(),
     ),
