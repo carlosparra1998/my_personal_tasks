@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../model/task.dart';
+import '../../../utils/strings.dart' as s;
 import '../../../utils/utils.dart';
 import '../../../view_model/task_view_model.dart';
 import '../../../view_model/theme_view_model.dart';
@@ -12,7 +13,7 @@ Future<String?> addTaskDialog(BuildContext context) async {
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
 
-  String dropdownvalue = '🔴 Prioridad 1';
+  String dropdownvalue = s.priority1;
 
   int priority = 1;
 
@@ -32,10 +33,10 @@ Future<String?> addTaskDialog(BuildContext context) async {
                 color: themeViewModel.fontColor,
               ),
               title: Text(
-                'Añade una nueva tarea',
+                s.addTask,
                 style: TextStyle(color: themeViewModel.fontColor),
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16.0))),
               content: SingleChildScrollView(
                 child: Column(
@@ -47,14 +48,14 @@ Future<String?> addTaskDialog(BuildContext context) async {
                       cursorColor: themeViewModel.subtitleColor,
                       controller: titleController,
                       decoration: InputDecoration(
-                          labelText: 'Título de la tarea',
+                          labelText: s.titleTask,
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
-                          border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
+                          border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
                                   Radius.circular(8.0)))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextField(
@@ -62,14 +63,14 @@ Future<String?> addTaskDialog(BuildContext context) async {
                       controller: descriptionController,
                       style: TextStyle(color: themeViewModel.fontColor),
                       decoration: InputDecoration(
-                          labelText: 'Descripción de la tarea',
+                          labelText: s.descriptionTask,
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
-                          border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
+                          border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
                                   Radius.circular(8.0)))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     DropdownButtonHideUnderline(
@@ -82,7 +83,6 @@ Future<String?> addTaskDialog(BuildContext context) async {
                                 const BorderRadius.all(Radius.circular(8.0)),
                             border: Border.all(color: Colors.grey[500]!)),
                         alignment: AlignmentDirectional.centerStart,
-                        //dropdownWidth : 1205.0,
 
                         items: priorities
                             .map((item) => DropdownMenuItem<String>(
@@ -104,7 +104,6 @@ Future<String?> addTaskDialog(BuildContext context) async {
                           setState(() {});
                         },
 
-                        //itemHeight: 40,
                       ),
                     ),
                   ],
@@ -115,7 +114,7 @@ Future<String?> addTaskDialog(BuildContext context) async {
                 OutlinedButton(
                   onPressed: () {
                     if(titleController.text.isEmpty){
-                      showToast("El campo título no puede estar vacío");
+                      showToast(s.emptyField);
                       return;
                     }
                     taskViewModel.setTaskInList(Task(
@@ -126,13 +125,13 @@ Future<String?> addTaskDialog(BuildContext context) async {
 
                     Navigator.pop(context);
                   },
-                  child: Text(
-                    "Guardar",
-                    style: TextStyle(fontSize: 18.0, color: themeViewModel.buttonColor),
-                  ),
                   style: OutlinedButton.styleFrom(
                     shape: const StadiumBorder(),
                     side: BorderSide(color: themeViewModel.buttonColor, width: 1.5),
+                  ),
+                  child: Text(
+                    s.save,
+                    style: TextStyle(fontSize: 18.0, color: themeViewModel.buttonColor),
                   ),
                 ),
               ],

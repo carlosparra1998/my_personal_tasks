@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../model/task.dart';
+import '../../../utils/strings.dart' as s;
 import '../../../utils/utils.dart';
 import '../../../view_model/task_view_model.dart';
 import '../../../view_model/theme_view_model.dart';
@@ -33,10 +33,10 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                 color: themeViewModel.fontColor,
               ),
               title: Text(
-                'Modifica tu tarea',
+                s.modifyTask,
                 style: TextStyle(color: themeViewModel.fontColor),
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16.0))),
               content: SingleChildScrollView(
                 child: Column(
@@ -48,14 +48,14 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                       cursorColor: themeViewModel.subtitleColor,
                       controller: titleController,
                       decoration: InputDecoration(
-                          labelText: 'Título de la tarea',
+                          labelText: s.titleTask,
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
-                          border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
+                          border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
                                   Radius.circular(8.0)))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextField(
@@ -63,14 +63,14 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                       style: TextStyle(color: themeViewModel.fontColor),
                       controller: descriptionController,
                       decoration: InputDecoration(
-                          labelText: 'Descripción de la tarea',
+                          labelText: s.descriptionTask,
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
-                          border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
+                          border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
                                   Radius.circular(8.0)))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     DropdownButtonHideUnderline(
@@ -103,7 +103,6 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
 
                           setState(() {});
                         },
-                        //itemHeight: 40,
                       ),
                     ),
                   ],
@@ -114,22 +113,22 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                 OutlinedButton(
                   onPressed: () {
                     if (titleController.text.isEmpty) {
-                      showToast("El campo título no puede estar vacío");
+                      showToast(s.emptyField);
                       return;
                     }
                     taskViewModel.modifyTaskInList(id, titleController.text,
                         descriptionController.text, priority);
                     Navigator.pop(context);
                   },
-                  child: Text(
-                    "Guardar",
-                    style: TextStyle(
-                        fontSize: 18.0, color: themeViewModel.buttonColor),
-                  ),
                   style: OutlinedButton.styleFrom(
                     shape: const StadiumBorder(),
                     side: BorderSide(
                         color: themeViewModel.buttonColor, width: 1.5),
+                  ),
+                  child: Text(
+                    s.save,
+                    style: TextStyle(
+                        fontSize: 18.0, color: themeViewModel.buttonColor),
                   ),
                 ),
               ],

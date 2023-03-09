@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../model/task.dart';
+import '../../utils/strings.dart' as s;
 import '../../utils/utils.dart';
 
 class FirebaseRepository {
@@ -19,29 +20,32 @@ class FirebaseRepository {
     try {
       for (Task task in taskList) {
         await collection.doc(task.id.toString()).set({
-          "id": task.id,
-          "title": task.title,
-          "description": task.description,
-          "priorityLevel": task.priorityLevel
+          s.idJSON: task.id,
+          s.titleJSON: task.title,
+          s.descriptionJSON: task.description,
+          s.priorityLevelJSON: task.priorityLevel
         });
       }
+    // ignore: empty_catches
     } on Exception {}
   }
 
   Future<void> setTaskInList(Task task) async {
     try {
       await collection.doc(task.id.toString()).set({
-        "id": task.id,
-        "title": task.title,
-        "description": task.description,
-        "priorityLevel": task.priorityLevel
+        s.idJSON: task.id,
+        s.titleJSON: task.title,
+        s.descriptionJSON: task.description,
+        s.priorityLevelJSON: task.priorityLevel
       });
+    // ignore: empty_catches
     } on Exception {}
   }
 
   Future<void> deleteTaskInList(int id) async {
     try {
       await collection.doc(id.toString()).delete();
+    // ignore: empty_catches
     } on Exception {}
   }
 }

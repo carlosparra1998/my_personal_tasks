@@ -1,8 +1,9 @@
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../model/task.dart';
+import 'strings.dart' as s;
 
-var priorities = ['🔴 Prioridad 1', '🟠 Prioridad 2', '🔵 Prioridad 3'];
+var priorities = [s.priority1, s.priority2, s.priority3];
 
 List<Task> sortList(List<Task> taskList) {
   taskList.sort((a, b) => a.priorityLevel.compareTo(b.priorityLevel));
@@ -20,7 +21,7 @@ List<Task> listTaskFromJson(List<Map<String, dynamic>> json) {
 
 void showToast(String msg) {
   Fluttertoast.showToast(
-      msg: msg, // message
+      msg: msg,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 2);

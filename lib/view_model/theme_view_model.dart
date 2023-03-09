@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/strings.dart' as s;
+
 class ThemeVM with ChangeNotifier {
   bool _darkTheme;
 
@@ -19,17 +21,17 @@ class ThemeVM with ChangeNotifier {
     var prefs = await SharedPreferences.getInstance();
     
     _darkTheme = !_darkTheme;
-    themeColor = (_darkTheme) ? Color.fromARGB(255, 46, 46, 46) : Colors.white;
+    themeColor = (_darkTheme) ? const Color.fromARGB(255, 46, 46, 46) : Colors.white;
     fontColor = (_darkTheme) ? Colors.white : Colors.black;
-    cardColor = (_darkTheme) ? Color.fromARGB(255, 88, 88, 88) : Colors.white;
+    cardColor = (_darkTheme) ? const Color.fromARGB(255, 88, 88, 88) : Colors.white;
     subtitleColor = (_darkTheme)
-        ? Color.fromARGB(255, 185, 185, 185)
-        : Color.fromARGB(255, 139, 139, 139);
+        ? const Color.fromARGB(255, 185, 185, 185)
+        : const Color.fromARGB(255, 139, 139, 139);
     iconColor = (_darkTheme) ? Colors.black : Colors.white;
     buttonColor =
-        (_darkTheme) ? Color.fromARGB(255, 255, 212, 212) : Colors.red;
+        (_darkTheme) ? const Color.fromARGB(255, 255, 212, 212) : Colors.red;
 
-    prefs.setBool('darkTheme', _darkTheme);
+    prefs.setBool(s.darkThemeKey, _darkTheme);
 
     notifyListeners();
   }

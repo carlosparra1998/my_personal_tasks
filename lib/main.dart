@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
 import 'firebase_options.dart';
+import 'utils/strings.dart' as s;
 import 'view_model/task_view_model.dart';
 import 'view_model/theme_view_model.dart';
 
@@ -17,19 +18,19 @@ Future<void> main() async {
 
   var prefs = await SharedPreferences.getInstance();
 
-  bool darkTheme = prefs.getBool('darkTheme') ?? false;
+  bool darkTheme = prefs.getBool(s.darkThemeKey) ?? false;
 
   Color themeColor =
-      (darkTheme) ? Color.fromARGB(255, 46, 46, 46) : Colors.white;
+      (darkTheme) ? const Color.fromARGB(255, 46, 46, 46) : Colors.white;
   Color fontColor = (darkTheme) ? Colors.white : Colors.black;
   Color subtitleColor = (darkTheme)
-      ? Color.fromARGB(255, 185, 185, 185)
-      : Color.fromARGB(255, 139, 139, 139);
+      ? const Color.fromARGB(255, 185, 185, 185)
+      : const Color.fromARGB(255, 139, 139, 139);
   Color cardColor =
-      (darkTheme) ? Color.fromARGB(255, 88, 88, 88) : Colors.white;
+      (darkTheme) ? const Color.fromARGB(255, 88, 88, 88) : Colors.white;
   Color iconColor = (darkTheme) ? Colors.black : Colors.white;
   Color buttonColor =
-      (darkTheme) ? Color.fromARGB(255, 255, 212, 212) : Colors.red;
+      (darkTheme) ? const Color.fromARGB(255, 255, 212, 212) : Colors.red;
 
   runApp(
     MultiProvider(

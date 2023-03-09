@@ -36,7 +36,6 @@ class TaskVM with ChangeNotifier {
     }
 
     updateStream();
-
     notifyListeners();
   }
 
@@ -49,8 +48,8 @@ class TaskVM with ChangeNotifier {
   void setTaskList(List<Task> listTask) {
     CacheRepository().setTaskList = listTask;
     CacheRepository().sortTaskList();
-    updateStream();
 
+    updateStream();
     notifyListeners();
   }
 
@@ -59,8 +58,8 @@ class TaskVM with ChangeNotifier {
     FirebaseRepository().setTaskInList(task);
     setIdLast(task.id);
     CacheRepository().sortTaskList();
-    updateStream();
 
+    updateStream();
     notifyListeners();
   }
 
@@ -70,24 +69,24 @@ class TaskVM with ChangeNotifier {
     FirebaseRepository()
         .setTaskInList(Task(id, title, description, priorityLevel));
     CacheRepository().sortTaskList();
-    updateStream();
 
+    updateStream();
     notifyListeners();
   }
 
   void removeTaskInList(int index, int id) {
     CacheRepository().removeTaskInList(index);
     FirebaseRepository().deleteTaskInList(id);
-    updateStream();
 
+    updateStream();
     notifyListeners();
   }
 
   void undoRemoveTaskInList() {
     CacheRepository().undoRemoveTaskInList();
     FirebaseRepository().setTaskList(CacheRepository().getTaskList);
+    
     updateStream();
-
     notifyListeners();
   }
 }

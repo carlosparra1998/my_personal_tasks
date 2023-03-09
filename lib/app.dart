@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import 'utils/strings.dart' as s;
 import 'view/home/home_screen.dart';
-import 'view_model/theme_view_model.dart';
 
 class MyPersonalTasksApp extends StatelessWidget {
   const MyPersonalTasksApp({super.key});
@@ -10,11 +9,11 @@ class MyPersonalTasksApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Personal Tasks',
+      title: s.appTitle,
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const HomeScreen(title: 'My Personal Tasks'),
+      home: const HomeScreen(title: s.appTitle),
     );
   }
 }

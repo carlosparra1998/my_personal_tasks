@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/strings.dart' as s;
 import '../../../view_model/theme_view_model.dart';
 import '../dialogs/add_dialog.dart';
 
@@ -22,7 +21,7 @@ class _HomeFloatingButton extends State<HomeFloatingButton> {
       onPressed: () {
         addTaskDialog(context);
       },
-      tooltip: 'Añadir nueva tarea',
+      tooltip: s.addNewTask,
       child: Icon(Icons.add, color: themeViewModel.themeColor,),
     );
   }

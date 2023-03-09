@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
 import '../../../model/stream_response.dart';
-import '../../../model/task.dart';
-import '../../../repositories/firebase/firebase_repository.dart';
+import '../../../utils/strings.dart' as s;
 import '../../../view_model/task_view_model.dart';
 import '../../../view_model/theme_view_model.dart';
 import '../dialogs/modify_dialog.dart';
@@ -69,10 +66,10 @@ class _HomeListView extends State<HomeListView> {
                             index, streamTasks!.response[index].id);
 
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          duration: Duration(milliseconds: 2300),
-                          content: Text('Tarea completada'),
+                          duration: const Duration(milliseconds: 2300),
+                          content: const Text(s.taskComplete),
                           action: SnackBarAction(
-                            label: 'Deshacer',
+                            label: s.undoAction,
                             onPressed: () {
                               taskViewModel.undoRemoveTaskInList();
                               setState(() {});

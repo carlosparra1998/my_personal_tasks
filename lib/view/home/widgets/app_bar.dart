@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../view_model/theme_view_model.dart';
 
-PreferredSizeWidget HomeAppBar(BuildContext context, String title){
+PreferredSizeWidget homeAppBar(BuildContext context, String title){
   ThemeVM themeViewModel = context.watch<ThemeVM>();
   
   return AppBar(
