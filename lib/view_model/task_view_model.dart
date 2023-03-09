@@ -9,11 +9,8 @@ import '../model/stream_response.dart';
 import '../model/task.dart';
 
 class TaskVM with ChangeNotifier {
-  bool _darkTheme = false;
 
   int _idLast = 0;
-
-  get getDarkTheme => _darkTheme;
 
   get getIdLast => _idLast;
 
@@ -48,11 +45,6 @@ class TaskVM with ChangeNotifier {
 
     notifyListeners();
 
-  }
-
-  void changeDarkTheme() {
-    _darkTheme = !_darkTheme;
-    notifyListeners();
   }
 
   List<Task> getTaskList() => CacheRepository().getTaskList;
