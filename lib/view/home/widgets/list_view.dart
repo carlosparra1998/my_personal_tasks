@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../../model/stream_response.dart';
 import '../../../model/task.dart';
 import '../../../repositories/firebase/firebase_repository.dart';
 import '../../../view_model/task_view_model.dart';
@@ -25,72 +26,75 @@ class _HomeListView extends State<HomeListView> {
     return StreamBuilder<Object>(
         stream: taskViewModel.stream,
         builder: (context, snapshot) {
-          return (snapshot.connectionState != ConnectionState.waiting)
-              ? Container(
-                  color: themeViewModel.themeColor,
-                  child: Center(
-                      child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: taskViewModel.getTaskList().length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        color: themeViewModel.cardColor,
-                        child: ListTile(
-                          onTap: () {
-                            modifyTaskDialog(
-                              context,
-                              taskViewModel.getTaskList()[index].title,
-                              taskViewModel.getTaskList()[index].description,
-                              taskViewModel.getTaskList()[index].priorityLevel,
-                              taskViewModel.getTaskList()[index].id,
-                            );
-                          },
-                          contentPadding: const EdgeInsets.all(0),
-                          leading: Checkbox(
-                            side: BorderSide(
-                              color: (taskViewModel
-                                          .getTaskList()[index]
-                                          .priorityLevel ==
-                                      1)
-                                  ? Colors.red
-                                  : (taskViewModel
-                                              .getTaskList()[index]
-                                              .priorityLevel ==
-                                          2
-                                      ? Colors.orange
-                                      : Colors.blue), //your desire colour here
-                              width: 2.5,
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            onChanged: (bool? value) {
-                              taskViewModel.removeTaskInList(
-                                  index, taskViewModel.getTaskList()[index].id);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          StreamResponse? streamTasks;
+          streamTasks =
+              ((snapshot.data) as StreamResponse?) ?? StreamResponse([]);
 
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                duration: Duration(milliseconds: 2300),
-                                content: Text('Tarea completada'),
-                                action: SnackBarAction(
-                                  label: 'Deshacer',
-                                  onPressed: () {
-                                    taskViewModel.undoRemoveTaskInList();
-                                    setState(() {});
-                                  },
-                                ),
-                              ));
-                            },
-                            value: false,
-                          ),
-                          title: Text(taskViewModel.getTaskList()[index].title, style: TextStyle(color: themeViewModel.fontColor),),
-                          subtitle: Text(
-                              taskViewModel.getTaskList()[index].description, style: TextStyle(color: themeViewModel.subtitleColor),),
-                        ),
+          return Container(
+            color: themeViewModel.themeColor,
+            child: Center(
+                child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: streamTasks.response.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  color: themeViewModel.cardColor,
+                  child: ListTile(
+                    onTap: () {
+                      modifyTaskDialog(
+                        context,
+                        streamTasks!.response[index].title,
+                        streamTasks.response[index].description,
+                        streamTasks.response[index].priorityLevel,
+                        streamTasks.response[index].id,
                       );
                     },
-                  )),
-                )
-              : const Center(child: CircularProgressIndicator());
+                    contentPadding: const EdgeInsets.all(0),
+                    leading: Checkbox(
+                      side: BorderSide(
+                        color: (streamTasks!.response[index].priorityLevel == 1)
+                            ? Colors.red
+                            : (streamTasks.response[index].priorityLevel == 2
+                                ? Colors.orange
+                                : Colors.blue), //your desire colour here
+                        width: 2.5,
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      onChanged: (bool? value) {
+                        taskViewModel.removeTaskInList(
+                            index, streamTasks!.response[index].id);
+
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          duration: Duration(milliseconds: 2300),
+                          content: Text('Tarea completada'),
+                          action: SnackBarAction(
+                            label: 'Deshacer',
+                            onPressed: () {
+                              taskViewModel.undoRemoveTaskInList();
+                              setState(() {});
+                            },
+                          ),
+                        ));
+                      },
+                      value: false,
+                    ),
+                    title: Text(
+                      streamTasks.response[index].title,
+                      style: TextStyle(color: themeViewModel.fontColor),
+                    ),
+                    subtitle: Text(
+                      streamTasks.response[index].description,
+                      style: TextStyle(color: themeViewModel.subtitleColor),
+                    ),
+                  ),
+                );
+              },
+            )),
+          );
         });
   }
 }

@@ -22,19 +22,17 @@ class TaskVM with ChangeNotifier {
 
   Stream<StreamResponse> get stream {
     if (!_streamController.hasListener) {
-      enableStream();
+      firebaseToCache();
     }
     return _streamController.stream;
   }
 
-  void enableStream() async {
+  void firebaseToCache() async {
     List<Task> taskList = await FirebaseRepository().getTaskList();
-    String status = "KO";
 
     if (taskList.isNotEmpty) {
       setIdLast(taskList.last.id);
       setTaskList(taskList);
-      status = "OK";
     }
 
     updateStream();
@@ -51,7 +49,8 @@ class TaskVM with ChangeNotifier {
   void setTaskList(List<Task> listTask) {
     CacheRepository().setTaskList = listTask;
     CacheRepository().sortTaskList();
-    //updateStream();
+    updateStream();
+
     notifyListeners();
   }
 
@@ -60,7 +59,8 @@ class TaskVM with ChangeNotifier {
     FirebaseRepository().setTaskInList(task);
     setIdLast(task.id);
     CacheRepository().sortTaskList();
-    //updateStream();
+    updateStream();
+
     notifyListeners();
   }
 
@@ -70,7 +70,7 @@ class TaskVM with ChangeNotifier {
     FirebaseRepository()
         .setTaskInList(Task(id, title, description, priorityLevel));
     CacheRepository().sortTaskList();
-    //updateStream();
+    updateStream();
 
     notifyListeners();
   }
@@ -78,7 +78,7 @@ class TaskVM with ChangeNotifier {
   void removeTaskInList(int index, int id) {
     CacheRepository().removeTaskInList(index);
     FirebaseRepository().deleteTaskInList(id);
-    //updateStream();
+    updateStream();
 
     notifyListeners();
   }
@@ -86,7 +86,7 @@ class TaskVM with ChangeNotifier {
   void undoRemoveTaskInList() {
     CacheRepository().undoRemoveTaskInList();
     FirebaseRepository().setTaskList(CacheRepository().getTaskList);
-    //updateStream();
+    updateStream();
 
     notifyListeners();
   }
