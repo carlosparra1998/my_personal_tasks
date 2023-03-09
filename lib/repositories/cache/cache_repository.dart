@@ -2,7 +2,6 @@ import '../../model/task.dart';
 import '../../utils/utils.dart';
 
 class CacheRepository {
-  final prioridades = ['🔴 Prioridad 1', '🟠 Prioridad 2', '🔵 Prioridad 3'];
 
   static List<Task> _taskList = [];
 

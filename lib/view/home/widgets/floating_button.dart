@@ -22,7 +22,7 @@ class _HomeFloatingButton extends State<HomeFloatingButton> {
       onPressed: () {
         addTaskDialog(context);
       },
-      tooltip: 'Increment',
+      tooltip: 'Añadir nueva tarea',
       child: Icon(Icons.add, color: themeViewModel.themeColor,),
     );
   }

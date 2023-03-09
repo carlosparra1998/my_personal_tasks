@@ -25,10 +25,6 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TaskVM taskViewModel = context.watch<TaskVM>();
-
-    taskViewModel.sortTaskList();
-
     return Scaffold(
         appBar: HomeAppBar(context, widget.title),
         body: const HomeListView(),

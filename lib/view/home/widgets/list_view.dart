@@ -45,7 +45,7 @@ class _HomeListView extends State<HomeListView> {
                               taskViewModel.getTaskList()[index].id,
                             );
                           },
-                          contentPadding: EdgeInsets.all(0),
+                          contentPadding: const EdgeInsets.all(0),
                           leading: Checkbox(
                             side: BorderSide(
                               color: (taskViewModel
@@ -90,7 +90,7 @@ class _HomeListView extends State<HomeListView> {
                     },
                   )),
                 )
-              : Center(child: CircularProgressIndicator());
+              : const Center(child: CircularProgressIndicator());
         });
   }
 }

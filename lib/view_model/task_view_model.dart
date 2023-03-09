@@ -9,12 +9,11 @@ import '../model/stream_response.dart';
 import '../model/task.dart';
 
 class TaskVM with ChangeNotifier {
-
   int _idLast = 0;
 
   get getIdLast => _idLast;
 
-  void setIdLast(int id){
+  void setIdLast(int id) {
     _idLast = id;
   }
 
@@ -28,36 +27,31 @@ class TaskVM with ChangeNotifier {
     return _streamController.stream;
   }
 
-  void enableStream() async{
+  void enableStream() async {
     List<Task> taskList = await FirebaseRepository().getTaskList();
-    
+    String status = "KO";
 
-    if(taskList.isNotEmpty){
+    if (taskList.isNotEmpty) {
       setIdLast(taskList.last.id);
       setTaskList(taskList);
-      _streamController.add(
-          StreamResponse("OK", taskList));
+      status = "OK";
     }
-    else{
-      _streamController.add(
-          StreamResponse("KO", getTaskList()));
-    }
+
+    updateStream();
 
     notifyListeners();
+  }
 
+  void updateStream() {
+    _streamController.add(StreamResponse(getTaskList()));
   }
 
   List<Task> getTaskList() => CacheRepository().getTaskList;
-  List<Task> getTaskListTemp() => CacheRepository().getTaskListTemp;
 
   void setTaskList(List<Task> listTask) {
     CacheRepository().setTaskList = listTask;
     CacheRepository().sortTaskList();
-    notifyListeners();
-  }
-
-  void setTaskListTemp(List<Task> listTaskTemp) {
-    CacheRepository().setTaskList = listTaskTemp;
+    //updateStream();
     notifyListeners();
   }
 
@@ -66,32 +60,34 @@ class TaskVM with ChangeNotifier {
     FirebaseRepository().setTaskInList(task);
     setIdLast(task.id);
     CacheRepository().sortTaskList();
+    //updateStream();
     notifyListeners();
   }
 
   void modifyTaskInList(
       int id, String title, String description, int priorityLevel) {
-    CacheRepository()
-        .modifyTaskInList(id, title, description, priorityLevel);
-    FirebaseRepository().setTaskInList(Task(id, title, description, priorityLevel));
-    sortTaskList();
+    CacheRepository().modifyTaskInList(id, title, description, priorityLevel);
+    FirebaseRepository()
+        .setTaskInList(Task(id, title, description, priorityLevel));
+    CacheRepository().sortTaskList();
+    //updateStream();
+
     notifyListeners();
   }
 
   void removeTaskInList(int index, int id) {
     CacheRepository().removeTaskInList(index);
     FirebaseRepository().deleteTaskInList(id);
+    //updateStream();
+
     notifyListeners();
   }
 
   void undoRemoveTaskInList() {
     CacheRepository().undoRemoveTaskInList();
     FirebaseRepository().setTaskList(CacheRepository().getTaskList);
-    notifyListeners();
-  }
+    //updateStream();
 
-  void sortTaskList() {
-    CacheRepository().sortTaskList();
     notifyListeners();
   }
 }
