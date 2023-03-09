@@ -10,7 +10,7 @@ El sistema obtiene las películas de la API de *The Movie DB*: https://www.themo
 
 La siguiente ilustración corresponde con el diagrama de estados de la aplicación.
 
-![](https://github.com/carlosparra1998/WembleyStudiosMovies/blob/main/readme_raw/diagram.png)
+![](https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/diagram.png)
 
 El patrón de diseño seguido ha sido **Model View View-Model (MVVM)**, en la cual hemos incorporado la funcionalidad de **Provider** para manejar los estados de la app.
 
