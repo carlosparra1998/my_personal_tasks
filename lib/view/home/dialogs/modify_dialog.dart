@@ -43,6 +43,9 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    const SizedBox(
+                      height: 15.0,
+                    ),
                     TextField(
                       style: TextStyle(color: themeViewModel.fontColor),
                       cursorColor: themeViewModel.subtitleColor,
@@ -52,8 +55,8 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
                           border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(8.0)))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)))),
                     ),
                     const SizedBox(
                       height: 20,
@@ -67,8 +70,8 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
                           border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(8.0)))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)))),
                     ),
                     const SizedBox(
                       height: 20,

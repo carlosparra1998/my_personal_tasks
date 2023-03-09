@@ -43,6 +43,7 @@ Future<String?> addTaskDialog(BuildContext context) async {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    const SizedBox(height: 15.0,),
                     TextField(
                       style: TextStyle(color: themeViewModel.fontColor),
                       cursorColor: themeViewModel.subtitleColor,
