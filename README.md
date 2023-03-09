@@ -6,38 +6,30 @@ Aplicación desarrollada en Flutter para la gestión de tareas del usuario.
 
 ## Funcionamiento
 
-El sistema obtiene las películas de la API de *The Movie DB*: https://www.themoviedb.org/documentation/api?language=es-ES
-
 La siguiente ilustración corresponde con el diagrama de estados de la aplicación.
 
 ![](https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/diagram.png)
 
 El patrón de diseño seguido ha sido **Model View View-Model (MVVM)**, en la cual hemos incorporado la funcionalidad de **Provider** para manejar los estados de la app.
 
-Se ha creado un único ViewModel para la gestión de la funcionalidad inherente a la entidad **Movie**.
+Se han creado dos ViewModel, el primero (TaskViewModel) gestiona las tareas creadas por el usuario, en la que se incluye adición, modificación, y borrado, tanto en memoria como en Firebase. El segundo (ThemeViewModel) facilita la gestión de los temas de la aplicación, de esta forma el usuario puede cambiar en cualquier momento el tema claro a tema oscuro, y viceversa.
 
-La obtención de los datos, tanto de las películas populares como las buscadas por el usuario, se llevará a cabo gracias a un **stream** que comunica el View con el ViewModel de la entidad Movie. Este stream seguirá proporcionando información al View mientras el usuario interactúa con el sistema, como el avance a la siguiente página de películas.
+La obtención de los datos se llevará a cabo gracias a un **stream** que comunica el View con el ViewModel de la entidad Task. Este stream seguirá proporcionando tareas a la lista (Tanto de Firebase como memoria caché) al View mientras el usuario interactúa con el sistema.
 
-Para la **persistencia** de las películas seleccionadas como favoritas se ha creado una base de datos con *SQLite*. Al iniciar la app, se realiza un volcado de la base de datos a la caché. De esta forma, el usuario tendrá en todo momento disponible su lista de películas favoritas.
+Se ha incorporado un sistema de prioridades, donde podemos etiquetar cada tarea en uno de ellos. En este caso se incluye la **prioridad 1 (ALTA)**, la **prioridad 2 (MEDIA)** y la **prioridad 3 (BAJA)**. En la lista se mostrará las tareas ordenadas según la prioridad, es decir, se muestran primero las más prioritarias, y por último las menos prioritarias.
 
 ## Vídeos de prueba
 
-En este fragmento podemos comprobar el funcionamiento de la lista de películas populares obtenidas por la API correspondiente. Incluso el acceso a la siguiente página de la lista.
+En este fragmento podemos comprobar el funcionamiento de **
 
 <p align="center">
   <img src="https://github.com/carlosparra1998/WembleyStudiosMovies/blob/main/readme_raw/1.gif" />
 </p>
 
-En este fragmento podemos comprobar el funcionamiento de las películas **favoritas** del usuario.
+En este fragmento podemos comprobar el funcionamiento de **
 
 
 <p align="center">
   <img src="https://github.com/carlosparra1998/WembleyStudiosMovies/blob/main/readme_raw/2.gif" />
 </p>
 
-En este fragmento podemos comprobar el funcionamiento del **Search Bar**.
-
-
-<p align="center">
-  <img src="https://github.com/carlosparra1998/WembleyStudiosMovies/blob/main/readme_raw/3.gif" />
-</p>
