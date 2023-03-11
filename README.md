@@ -20,27 +20,27 @@ Se ha incorporado un sistema de prioridades, donde podemos etiquetar cada tarea 
 
 ## Vídeos de prueba
 
-En este fragmento podemos comprobar la adición de nuevas tareas a la lista.**
+En este fragmento podemos comprobar la adición de nuevas tareas a la lista.
 
 <p align="center">
   <img src="https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/4.gif" />
 </p>
 
-En este fragmento podemos comprobar la modificación de tareas existentes.**
+En este fragmento podemos comprobar la modificación de tareas existentes.
 
 
 <p align="center">
   <img src="https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/3.gif" />
 </p>
 
-En este fragmento podemos comprobar el borrado de tareas de la lista al seleccionar el botón situado a la izquierda.**
+En este fragmento podemos comprobar el borrado de tareas (con animación) de la lista al seleccionar el botón situado a la izquierda.
 
 
 <p align="center">
   <img src="https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/2.gif" />
 </p>
 
-En este fragmento podemos comprobar el cambio del tema oscuro al tema claro.**
+En este fragmento podemos comprobar el cambio del tema oscuro al tema claro.
 
 
 <p align="center">
