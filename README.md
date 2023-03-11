@@ -2,7 +2,7 @@
 
 Aplicación desarrollada en Flutter para la gestión de tareas del usuario.
 
-[**DESCARGAR APK**](https://github.com/carlosparra1998/WembleyStudiosMovies/raw/main/apk/app-release.apk)
+[**DESCARGAR APK**](https://github.com/carlosparra1998/my_personal_tasks/raw/main/apk/app-release.apk)
 
 ## Funcionamiento
 
