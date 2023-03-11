@@ -55,6 +55,11 @@ class _HomeListView extends State<HomeListView> {
                   },
                   contentPadding: const EdgeInsets.all(0),
                   leading: Checkbox(
+                    activeColor: (task.priorityLevel == 1)
+                          ? Colors.red
+                          : (task.priorityLevel == 2
+                              ? Colors.orange
+                              : Colors.blue),
                     side: BorderSide(
                       color: (task.priorityLevel == 1)
                           ? Colors.red
