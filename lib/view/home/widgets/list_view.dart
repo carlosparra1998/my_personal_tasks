@@ -55,11 +55,12 @@ class _HomeListView extends State<HomeListView> {
                   },
                   contentPadding: const EdgeInsets.all(0),
                   leading: Checkbox(
+                    key : Key('completeCheck'),
                     activeColor: (task.priorityLevel == 1)
-                          ? Colors.red
-                          : (task.priorityLevel == 2
-                              ? Colors.orange
-                              : Colors.blue),
+                        ? Colors.red
+                        : (task.priorityLevel == 2
+                            ? Colors.orange
+                            : Colors.blue),
                     side: BorderSide(
                       color: (task.priorityLevel == 1)
                           ? Colors.red
@@ -71,7 +72,7 @@ class _HomeListView extends State<HomeListView> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onChanged: (_) {
-                      if (functional) {
+                      if (true) {
                         keys.currentState!.removeItem(
                             index,
                             (context, animation) =>
@@ -86,7 +87,6 @@ class _HomeListView extends State<HomeListView> {
                             label: s.undoAction,
                             onPressed: () {
                               taskViewModel.undoRemoveTaskInList();
-
                               setState(() {});
                             },
                           ),
@@ -111,15 +111,16 @@ class _HomeListView extends State<HomeListView> {
           return Container(
             color: themeViewModel.themeColor,
             child: Center(
+                key: Key("listView"),
                 child: AnimatedList(
-              key: keys,
-              padding: const EdgeInsets.all(8),
-              initialItemCount: streamTasks.response.length,
-              itemBuilder: (context, index, animation) {
-                return buildTask(
-                    streamTasks!.response[index], index, animation, true);
-              },
-            )),
+                  key: keys,
+                  padding: const EdgeInsets.all(8),
+                  initialItemCount: streamTasks.response.length,
+                  itemBuilder: (context, index, animation) {
+                    return buildTask(
+                        streamTasks!.response[index], index, animation, true);
+                  },
+                )),
           );
         });
   }

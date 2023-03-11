@@ -47,6 +47,7 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                       height: 15.0,
                     ),
                     TextField(
+                      key: Key("titleMod"),
                       style: TextStyle(color: themeViewModel.fontColor),
                       cursorColor: themeViewModel.subtitleColor,
                       controller: titleController,
@@ -62,6 +63,7 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                       height: 20,
                     ),
                     TextField(
+                      key: Key("descriptionMod"),
                       cursorColor: themeViewModel.subtitleColor,
                       style: TextStyle(color: themeViewModel.fontColor),
                       controller: descriptionController,
@@ -114,6 +116,7 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
               actionsAlignment: MainAxisAlignment.center,
               actions: <Widget>[
                 OutlinedButton(
+                  key: Key("modifyButton"),
                   onPressed: () {
                     if (titleController.text.isEmpty) {
                       showToast(s.emptyField);

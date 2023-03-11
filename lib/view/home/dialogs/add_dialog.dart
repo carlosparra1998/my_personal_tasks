@@ -9,7 +9,6 @@ import '../../../view_model/task_view_model.dart';
 import '../../../view_model/theme_view_model.dart';
 
 Future<String?> addTaskDialog(BuildContext context) async {
-
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
 
@@ -43,8 +42,11 @@ Future<String?> addTaskDialog(BuildContext context) async {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const SizedBox(height: 15.0,),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
                     TextField(
+                      key: const Key("titleField"),
                       style: TextStyle(color: themeViewModel.fontColor),
                       cursorColor: themeViewModel.subtitleColor,
                       controller: titleController,
@@ -53,13 +55,14 @@ Future<String?> addTaskDialog(BuildContext context) async {
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
                           border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(8.0)))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)))),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextField(
+                      key: const Key("descriptionField"),
                       cursorColor: themeViewModel.subtitleColor,
                       controller: descriptionController,
                       style: TextStyle(color: themeViewModel.fontColor),
@@ -68,8 +71,8 @@ Future<String?> addTaskDialog(BuildContext context) async {
                           labelStyle:
                               TextStyle(color: themeViewModel.subtitleColor),
                           border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(8.0)))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)))),
                     ),
                     const SizedBox(
                       height: 20,
@@ -77,14 +80,13 @@ Future<String?> addTaskDialog(BuildContext context) async {
                     DropdownButtonHideUnderline(
                       child: DropdownButton2(
                         iconEnabledColor: themeViewModel.subtitleColor,
-                        dropdownDecoration: BoxDecoration(
-                            color: themeViewModel.cardColor),
+                        dropdownDecoration:
+                            BoxDecoration(color: themeViewModel.cardColor),
                         buttonDecoration: BoxDecoration(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(8.0)),
                             border: Border.all(color: Colors.grey[500]!)),
                         alignment: AlignmentDirectional.centerStart,
-
                         items: priorities
                             .map((item) => DropdownMenuItem<String>(
                                   alignment: AlignmentDirectional.centerStart,
@@ -104,7 +106,6 @@ Future<String?> addTaskDialog(BuildContext context) async {
                               : (dropdownvalue == priorities[1] ? 2 : 3);
                           setState(() {});
                         },
-
                       ),
                     ),
                   ],
@@ -113,8 +114,9 @@ Future<String?> addTaskDialog(BuildContext context) async {
               actionsAlignment: MainAxisAlignment.center,
               actions: <Widget>[
                 OutlinedButton(
+                  key: const Key("createButton"),
                   onPressed: () {
-                    if(titleController.text.isEmpty){
+                    if (titleController.text.isEmpty) {
                       showToast(s.emptyField);
                       return;
                     }
@@ -128,11 +130,13 @@ Future<String?> addTaskDialog(BuildContext context) async {
                   },
                   style: OutlinedButton.styleFrom(
                     shape: const StadiumBorder(),
-                    side: BorderSide(color: themeViewModel.buttonColor, width: 1.5),
+                    side: BorderSide(
+                        color: themeViewModel.buttonColor, width: 1.5),
                   ),
                   child: Text(
                     s.save,
-                    style: TextStyle(fontSize: 18.0, color: themeViewModel.buttonColor),
+                    style: TextStyle(
+                        fontSize: 18.0, color: themeViewModel.buttonColor),
                   ),
                 ),
               ],
