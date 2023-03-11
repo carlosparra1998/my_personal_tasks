@@ -79,7 +79,7 @@ class TaskVM with ChangeNotifier {
     FirebaseRepository().deleteTaskInList(id);
 
     updateStream();
-    notifyListeners();
+    //notifyListeners(); => Para la animación no es necesario, se actualiza el UI
   }
 
   void undoRemoveTaskInList() {

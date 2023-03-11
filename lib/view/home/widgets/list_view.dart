@@ -3,6 +3,7 @@ import 'package:my_personal_tasks/repositories/cache/cache_repository.dart';
 import 'package:provider/provider.dart';
 
 import '../../../model/stream_response.dart';
+import '../../../model/task.dart';
 import '../../../utils/strings.dart' as s;
 import '../../../view_model/task_view_model.dart';
 import '../../../view_model/theme_view_model.dart';
@@ -32,8 +33,8 @@ class _HomeListView extends State<HomeListView> {
           streamTasks =
               ((snapshot.data) as StreamResponse?) ?? StreamResponse([]);
 
-          Widget buildTask(StreamResponse streamTasks, int index,
-              Animation<double> animation) {
+          Widget buildTask(Task task, int index, Animation<double> animation,
+              bool functional) {
             TaskVM taskViewModel = context.watch<TaskVM>();
             ThemeVM themeViewModel = context.watch<ThemeVM>();
             return FadeTransition(
@@ -42,20 +43,22 @@ class _HomeListView extends State<HomeListView> {
                 color: themeViewModel.cardColor,
                 child: ListTile(
                   onTap: () {
-                    modifyTaskDialog(
-                      context,
-                      streamTasks!.response[index].title,
-                      streamTasks.response[index].description,
-                      streamTasks.response[index].priorityLevel,
-                      streamTasks.response[index].id,
-                    );
+                    if (functional) {
+                      modifyTaskDialog(
+                        context,
+                        task.title,
+                        task.description,
+                        task.priorityLevel,
+                        task.id,
+                      );
+                    }
                   },
                   contentPadding: const EdgeInsets.all(0),
                   leading: Checkbox(
                     side: BorderSide(
-                      color: (streamTasks!.response[index].priorityLevel == 1)
+                      color: (task.priorityLevel == 1)
                           ? Colors.red
-                          : (streamTasks.response[index].priorityLevel == 2
+                          : (task.priorityLevel == 2
                               ? Colors.orange
                               : Colors.blue), //your desire colour here
                       width: 2.5,
@@ -63,34 +66,36 @@ class _HomeListView extends State<HomeListView> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onChanged: (bool? value) {
-                      keys.currentState!.removeItem(
-                          index,
-                          (context, animation) =>
-                              buildTask(streamTasks!, index, animation),
-                          duration: Duration(seconds: 1));
-                      taskViewModel.removeTaskInList(
-                          index, streamTasks!.response[index].id);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        duration: const Duration(milliseconds: 2300),
-                        content: const Text(s.taskComplete),
-                        action: SnackBarAction(
-                          label: s.undoAction,
-                          onPressed: () {
-                            taskViewModel.undoRemoveTaskInList();
+                      if (functional) {
+                        keys.currentState!.removeItem(
+                            index,
+                            (context, animation) =>
+                                buildTask(task, index, animation, false),
+                            duration: const Duration(milliseconds: 450));
 
-                            setState(() {});
-                          },
-                        ),
-                      ));
+                        taskViewModel.removeTaskInList(index, task.id);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          duration: const Duration(milliseconds: 2300),
+                          content: const Text(s.taskComplete),
+                          action: SnackBarAction(
+                            label: s.undoAction,
+                            onPressed: () {
+                              taskViewModel.undoRemoveTaskInList();
+
+                              setState(() {});
+                            },
+                          ),
+                        ));
+                      }
                     },
                     value: false,
                   ),
                   title: Text(
-                    streamTasks.response[index].title,
+                    task.title,
                     style: TextStyle(color: themeViewModel.fontColor),
                   ),
                   subtitle: Text(
-                    streamTasks.response[index].description,
+                    task.description,
                     style: TextStyle(color: themeViewModel.subtitleColor),
                   ),
                 ),
@@ -106,7 +111,8 @@ class _HomeListView extends State<HomeListView> {
               padding: const EdgeInsets.all(8),
               initialItemCount: streamTasks.response.length,
               itemBuilder: (context, index, animation) {
-                return buildTask(streamTasks!, index, animation);
+                return buildTask(
+                    streamTasks!.response[index], index, animation, true);
               },
             )),
           );
