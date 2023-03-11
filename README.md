@@ -12,11 +12,11 @@ La siguiente ilustración corresponde con el diagrama de estados de la aplicaci�
 
 El patrón de diseño seguido ha sido **Model View View-Model (MVVM)**, en la cual hemos incorporado la funcionalidad de **Provider** para manejar los estados de la app.
 
-Se han creado dos ViewModel, el primero (**TaskViewModel**) gestiona las tareas del usuario, en la que se incluye adición, modificación y borrado, tanto en memoria como en Firebase. El segundo (**ThemeViewModel**) facilita la gestión de los los colores de los temas de la aplicación (claro y oscuro).
+Se han creado dos ViewModel, el primero (**TaskViewModel**) gestiona las tareas del usuario, en la que se incluye adición, modificación y borrado, tanto en memoria como en Firebase. El segundo (**ThemeViewModel**) facilita la gestión de los colores de los temas de la aplicación (claro y oscuro).
 
-La obtención de los datos se llevará a cabo gracias a un **stream** que comunica el View con el ViewModel de la entidad Task. Este stream seguirá proporcionando tareas a la lista (tanto de Firebase como memoria caché) al View mientras el usuario interactúa con el sistema.
+La obtención de los datos se llevará a cabo gracias a un **stream** que comunica el View con el ViewModel de la entidad Task. Este stream seguirá proporcionando tareas a la lista (tanto de Firebase como de memoria caché) al View mientras el usuario interactúa con el sistema.
 
-Se ha incorporado un sistema de prioridades en el cual podemos etiquetar cada tarea según su importancia. En la aplicación se incluye la **prioridad 1 (ALTA)**, la **prioridad 2 (MEDIA)** y la **prioridad 3 (BAJA)**. 
+Se ha incorporado un sistema de prioridades en el que permite etiquetar cada tarea según su importancia. En la aplicación se incluye la **prioridad 1 (ALTA)**, la **prioridad 2 (MEDIA)** y la **prioridad 3 (BAJA)**. 
 
 ## Vídeos de prueba
 
