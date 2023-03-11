@@ -72,7 +72,7 @@ class _HomeListView extends State<HomeListView> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onChanged: (_) {
-                      if (true) {
+                      if (functional) {
                         keys.currentState!.removeItem(
                             index,
                             (context, animation) =>
