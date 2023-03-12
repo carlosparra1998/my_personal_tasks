@@ -16,7 +16,7 @@ Se han creado dos ViewModel, el primero (**TaskViewModel**) gestiona las tareas 
 
 La obtención de los datos se llevará a cabo gracias a un **stream** que comunica el View con el ViewModel de la entidad Task. Este stream seguirá proporcionando tareas a la lista (tanto de Firebase como de memoria caché) al View mientras el usuario interactúa con el sistema.
 
-Se ha incorporado un sistema de prioridades en el que permite etiquetar cada tarea según su importancia. En la aplicación se incluye la **prioridad 1 (ALTA)**, la **prioridad 2 (MEDIA)** y la **prioridad 3 (BAJA)**. 
+Se ha incorporado un sistema de prioridades que permite etiquetar cada tarea según su importancia. En la aplicación se incluye la **prioridad 1 (ALTA)**, la **prioridad 2 (MEDIA)** y la **prioridad 3 (BAJA)**. 
 
 ## Resultados de los widget tests
 
