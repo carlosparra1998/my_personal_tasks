@@ -22,12 +22,6 @@ Se ha incorporado un sistema de prioridades en el que permite etiquetar cada tar
 
 *Para que funcionen todos los tests automatizados, se recomienda ejecutarlos todos de forma simultánea.*
 
-```sh
-flutter run -t test/widget_test.dart
-```
-
-
-
 <p align="center">
   <img src="https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/tests.png" />
 </p>
