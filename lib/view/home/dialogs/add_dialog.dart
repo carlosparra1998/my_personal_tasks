@@ -22,7 +22,6 @@ Future<String?> addTaskDialog(BuildContext context) async {
       context: context,
       builder: (context) {
         ThemeVM themeViewModel = context.watch<ThemeVM>();
-
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
@@ -46,7 +45,7 @@ Future<String?> addTaskDialog(BuildContext context) async {
                       height: 15.0,
                     ),
                     TextField(
-                      key: const Key("titleField"),
+                      key: const Key(s.titleFieldKey),
                       style: TextStyle(color: themeViewModel.fontColor),
                       cursorColor: themeViewModel.subtitleColor,
                       controller: titleController,
@@ -62,7 +61,7 @@ Future<String?> addTaskDialog(BuildContext context) async {
                       height: 20,
                     ),
                     TextField(
-                      key: const Key("descriptionField"),
+                      key: const Key(s.descriptionFieldKey),
                       cursorColor: themeViewModel.subtitleColor,
                       controller: descriptionController,
                       style: TextStyle(color: themeViewModel.fontColor),
@@ -114,7 +113,7 @@ Future<String?> addTaskDialog(BuildContext context) async {
               actionsAlignment: MainAxisAlignment.center,
               actions: <Widget>[
                 OutlinedButton(
-                  key: const Key("createButton"),
+                  key: const Key(s.createButtonKey),
                   onPressed: () {
                     if (titleController.text.isEmpty) {
                       showToast(s.emptyField);

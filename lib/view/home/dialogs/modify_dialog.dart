@@ -23,7 +23,6 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
       context: context,
       builder: (context) {
         ThemeVM themeViewModel = context.watch<ThemeVM>();
-
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
@@ -47,7 +46,7 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                       height: 15.0,
                     ),
                     TextField(
-                      key: Key("titleMod"),
+                      key: const Key(s.titleModKey),
                       style: TextStyle(color: themeViewModel.fontColor),
                       cursorColor: themeViewModel.subtitleColor,
                       controller: titleController,
@@ -63,7 +62,7 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
                       height: 20,
                     ),
                     TextField(
-                      key: Key("descriptionMod"),
+                      key: const Key(s.descriptionModKey),
                       cursorColor: themeViewModel.subtitleColor,
                       style: TextStyle(color: themeViewModel.fontColor),
                       controller: descriptionController,
@@ -116,7 +115,7 @@ Future<String?> modifyTaskDialog(BuildContext context, String title,
               actionsAlignment: MainAxisAlignment.center,
               actions: <Widget>[
                 OutlinedButton(
-                  key: Key("modifyButton"),
+                  key: const Key(s.modifyButtonKey),
                   onPressed: () {
                     if (titleController.text.isEmpty) {
                       showToast(s.emptyField);

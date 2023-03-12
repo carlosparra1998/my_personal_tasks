@@ -18,7 +18,7 @@ class _HomeFloatingButton extends State<HomeFloatingButton> {
     ThemeVM themeViewModel = context.watch<ThemeVM>();
 
     return FloatingActionButton(
-      key: const Key("fab1"),
+      key: const Key(s.fab1Key),
       onPressed: () {
         addTaskDialog(context);
       },

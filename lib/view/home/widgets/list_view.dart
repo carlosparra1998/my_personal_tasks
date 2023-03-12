@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_personal_tasks/repositories/cache/cache_repository.dart';
 import 'package:provider/provider.dart';
 
 import '../../../model/stream_response.dart';
@@ -55,7 +54,7 @@ class _HomeListView extends State<HomeListView> {
                   },
                   contentPadding: const EdgeInsets.all(0),
                   leading: Checkbox(
-                    key : Key('completeCheck'),
+                    key : const Key(s.completeCheckKey),
                     activeColor: (task.priorityLevel == 1)
                         ? Colors.red
                         : (task.priorityLevel == 2
@@ -111,7 +110,7 @@ class _HomeListView extends State<HomeListView> {
           return Container(
             color: themeViewModel.themeColor,
             child: Center(
-                key: Key("listView"),
+                key: const Key(s.listViewKey),
                 child: AnimatedList(
                   key: keys,
                   padding: const EdgeInsets.all(8),
