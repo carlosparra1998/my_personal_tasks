@@ -23,7 +23,7 @@ Se ha incorporado un sistema de prioridades que permite etiquetar cada tarea seg
 *Para que funcionen todos los tests automatizados, se recomienda ejecutarlos todos de forma simultánea.*
 
 <p align="center">
-  <img src="https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/tests.png" />
+  <img src="https://github.com/carlosparra1998/my_personal_tasks/blob/main/readme_raw/tests.gif" />
 </p>
 
 ## Vídeos de prueba
