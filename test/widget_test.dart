@@ -101,6 +101,10 @@ void main() {
     await tester.pump();
 
     expect(modifyButton, findsNothing);
+    
+    expect(find.text('Tarea test'), findsNothing);
+    expect(find.text('Tarea descripción'), findsNothing);
+
     expect(find.text('Tarea test 2'), findsOneWidget);
     expect(find.text('Tarea descripción 2'), findsOneWidget);
   });
